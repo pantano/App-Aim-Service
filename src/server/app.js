@@ -1,15 +1,14 @@
 const express = require('express');
 require('dotenv').config();
-require('./db/db.config');
+require('./db/db.config.js');
 
 const port = process.env.PORT || 5000;
-const routes = require('./routes/routes')
+const routes = require('./routes/routes.js')
 
 
 const app = express();
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 app.use('/', routes);
 
 

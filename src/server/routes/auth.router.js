@@ -1,10 +1,13 @@
 const router = require('express').Router();
-const { usersList, signUp, signIn } = require('../controllers/auth.controller');
+const { addUser, signIn, /*recover*/ } = require('../controllers/auth.controller.js');
+const { validatorAddUser } = require('../middlewares/validators.js');
 
 
-router.get('/users', usersList);
 
-router.post('/register', signUp);
+router.post('/newUser', validatorAddUser, addUser);
 router.post('/login', signIn);
+router.post('/forgot', /*recover*/ ); 
+
+
 
 module.exports = router;
