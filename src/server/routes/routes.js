@@ -1,11 +1,11 @@
 const express = require('express');
 const authRouter = require('./auth.router.js');
-const userRouter = require('./user.router.js');
+const reportRouter = require('./report.router.js');
 
 const app = express();
 
 app.use('/auth/', authRouter);
-app.use('/user/', userRouter);
+app.use('/report/', reportRouter);
 
 
 module.exports = app;

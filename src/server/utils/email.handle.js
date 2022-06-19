@@ -22,16 +22,20 @@ const sendEmail = async (email, subject, html) => {
     }
 };
 
-const templateSignUp = (name, password, email) => {
-    return `<h2>Hello ${name}, from Aim-Service we welcome you.</h2>
-    <p>With the following data you will be able to enter our platform.</p>
-    <p> Email: ${email} </br>
-    Password: ${password}</p></br>
-    <p>In your first access we will ask you to change your password.</p>`;
+const templateSignUp = (name) => {
+    return `<h2>Welcome you.</h2>
+    <p>Hello ${name}, registration successfully completed.</p>`;
+};
+
+const templateReset = (link) => {
+    return `<h2>Password Recovery Service</h2>
+    <p>To reset your password please click the link and follow instructions</p>
+    <a href="${link}">Click here to reset password</a>`
 };
 
 
 module.exports = { 
     sendEmail, 
-    templateSignUp
+    templateSignUp,
+    templateReset
 };

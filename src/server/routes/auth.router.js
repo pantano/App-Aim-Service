@@ -1,12 +1,16 @@
 const router = require('express').Router();
-const { addUser, signIn, /*recover*/ } = require('../controllers/auth.controller.js');
-const { validatorAddUser } = require('../middlewares/validators.js');
+const { addUser, signIn, forgot, reset, /*saveNewPassword*/ } = require('../controllers/auth.controller.js');
+const { validatorAddUser, validatorPassword } = require('../middlewares/validators.js');
 
 
 
-router.post('/newUser', validatorAddUser, addUser);
+router.post('/newUser', validatorAddUser, validatorPassword, addUser);
 router.post('/login', signIn);
-router.post('/forgot', /*recover*/ ); 
+
+router.post('/forgot', forgot);
+
+router.get('/reset/:token', reset); 
+// router.post('/reset/:token', validatorPassword, /*saveNewPassword*/); 
 
 
 

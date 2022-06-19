@@ -3,8 +3,8 @@ const { reportList, addReport } = require('../controllers/report.controller.js')
 
 router.get('/', /** isAuth, */ reportList);
 router.post('/',/** isAuth, validateReport, */ addReport);
-router.delete();
-router.patch();
+// router.delete();
+// router.patch();
 
 
 
