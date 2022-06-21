@@ -71,7 +71,7 @@ const forgot = async(req, res) => {
 
         const userData = { 
             id: user._id,
-            email: user.email
+            email: user.email,
         };
         const token = await tokenSign(userData, '15m');
         const link = `${process.env.PUBLIC_URL}/auth/reset/${token}`;
@@ -87,25 +87,43 @@ const forgot = async(req, res) => {
 /**
  * Reset
  * 
- * 
  */
 const reset = async(req, res) => {
-    try {
-        const { token } = req.params;
-        const tokenStatus = await tokenVerify(token);
-        console.log(tokenStatus);
-        if(!tokenStatus) return res.status(403).json({message: 'Token expired'}); //check
+    const token = req.params.token;
+    const tokenStatus = await tokenVerify(token);
 
-        return res.render('reset', {tokenStatus, token});
+    if (tokenStatus instanceof Error) {
+        res.status(403).json({ message: 'Token expired' });
+    } else {
+        res.render("reset", token );
+    };
+};
+
+/**
+ * Save new password
+ * 
+ */
+const saveNewPassword = async (req, res) => {
+    try {
+        const token  = req.params.token;
+        const tokenStatus = await tokenVerify(token);
+        console.log(tokenStatus)
+        const newPassword = await hashPassword(req.body.password);
+        console.log(req.body.password)
+        console.log(newPassword)
+        await User.findOneAndUpdate(tokenStatus._id, {password: newPassword});
+        return res.status(200).json({ message: 'Password changed'});
 
     } catch (error) {
         console.log(error);
     }
 };
 
+
 module.exports = {
     addUser,
     signIn,
     forgot,
-    reset
+    reset,
+    saveNewPassword
 };

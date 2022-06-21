@@ -15,6 +15,6 @@ const reportSchema = new Schema(
 );
 
 
-const Report = model('Report', reportSchema);
+const Report = model('Report', reportSchema, 'reports');
 
 module.exports = Report;
