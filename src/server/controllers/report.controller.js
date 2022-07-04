@@ -8,8 +8,8 @@ const Report = require('../models/report.model.js');
 
 const reportList = async (req, res) => {
       try {
-        const report = await Report.find({ user: req.auth.id });
-        return res.status(200).json({message: 'Operation success'});
+        const report = await Report.find({user: req.user.id});
+        return res.status(200).json({message: 'Operation success', report});
       } catch (error) {
         console.log(error)
       }
@@ -19,8 +19,6 @@ const reportList = async (req, res) => {
  * Add Report.
  *
  * @param {string}      client
- * @param {string}      site
- * @param {string}      adress
  * @param {string}      description
  * 
  * @returns {Object}
@@ -28,8 +26,8 @@ const reportList = async (req, res) => {
  const addReport = async (req, res) => {
     try {
         const report = new Report({
-            ...req.body,
-            user: req.auth.id
+          client: req.body.client,
+          description: req.body.description, 
         })
         await report.save();
         return res.status(200).json({message:'Report added successfully'});
@@ -40,7 +38,27 @@ const reportList = async (req, res) => {
  };
 
 
+ /**
+ * Search Report By Client.
+ *
+ * @param {string}      client
+ * 
+ * @returns {Object}
+ */
+ const searchReportByClient = async (req, res) => {
+    try {
+      const query = req.params.query;
+      const result = await Report.find({$text: {$search: query}});
+      return res.status(200).send(result);
+      
+    } catch (error) {
+        console.log(error)
+    }
+};
+
+
 module.exports = {
     reportList,
-    addReport
+    addReport,
+    searchReportByClient
 };

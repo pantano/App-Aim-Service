@@ -12,14 +12,14 @@ const validatorAddUser = [
         .isEmail().withMessage("Must be a valid email address")
         .normalizeEmail(),
           
-        (req, res, next) => {
-            try {
-                validationResult(req).throw()
-                return next() 
-            } catch (err) {
-                res.status(400).send({ errors: err.array() })
-            }
+    (req, res, next) => {
+        try {
+            validationResult(req).throw()
+            return next() 
+        } catch (err) {
+            res.status(400).send({ errors: err.array() })
         }
+    }
 ];
 
 
@@ -39,8 +39,30 @@ const validatorPassword = [
     }
 ];
 
+const validateReport = [
+    check('client')
+    .trim()
+    .notEmpty().withMessage('Field cannot be empty')
+    .isLength({ min: 4, max: 90 }).withMessage('Character count: min 4, max 90'),
+
+    check('description')
+    .trim()
+    .notEmpty().withMessage('Field cannot be empty'),
+
+    (req, res, next) => {
+        try {
+            validationResult(req).throw()
+            return next() 
+        } catch (err) {
+            res.status(400).send({ errors: err.array() })
+        }
+    }
+];
+
+
 
 module.exports = { 
     validatorAddUser, 
-    validatorPassword
+    validatorPassword,
+    validateReport
 };
