@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "93eaf127-a6fd-448d-b31f-20fb586a14f6",
+		"name": "aim-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "New User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"mingo\",\r\n\"email\": \"info@mingo.com\",\r\n\"password\": \"123456789\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/newUser",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"newUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\": \"info@mingo.com\",\r\n\"password\": \"987654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot password",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"email\": \"pepe@monje.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/forgot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"forgot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SaveNewPassword",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"987654321\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/auth/reset/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIwZjdhYWIyMTA3MTlhZDYzM2FkYTAiLCJlbWFpbCI6ImluZm9AbWluZ28uY29tIiwiaWF0IjoxNjU1Nzc5MDQ4LCJleHAiOjE2NTU3ODI2NDh9.VJ3nHpG4FSQ0GiZPrbbor0NpL9QqjN8zHI6l2MZbKD0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"reset",
+						"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIwZjdhYWIyMTA3MTlhZDYzM2FkYTAiLCJlbWFpbCI6ImluZm9AbWluZ28uY29tIiwiaWF0IjoxNjU1Nzc5MDQ4LCJleHAiOjE2NTU3ODI2NDh9.VJ3nHpG4FSQ0GiZPrbbor0NpL9QqjN8zHI6l2MZbKD0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmMzMDc4YzA2MTRhYjUyMzI2YWJhM2EiLCJlbWFpbCI6ImluZm9AcGVyZXouY29tIiwiaWF0IjoxNjU2OTQ4Njk2LCJleHAiOjE2NTY5NTIyOTZ9.6UWj3pIkds4-XhWdrBrDxW9oGcUkiLehtAl6d-IyRlM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client\":\"Movistar\",\r\n    \"site\":\"Centro de Atención Comercial Palermo\",\r\n    \"adress\":\"Av. Honduras 1234\",\r\n    \"description\":\"Auditoria Iso 9001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/report/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"report",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET report list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmIwZjdhYWIyMTA3MTlhZDYzM2FkYTAiLCJlbWFpbCI6ImluZm9AbWluZ28uY29tIiwiaWF0IjoxNjU3OTE1NjMzLCJleHAiOjE2NTc5MTkyMzN9.XD5kwYTdgELlplhmPD7VOqetNfigRKc2NiQg1y0rRkk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/report/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"report",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
